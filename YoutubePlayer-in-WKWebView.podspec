@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
   s.author             = { 'hmhv' => 'admin@hmhv.info' }
   s.source             = { :git => 'https://github.com/hmhv/YoutubePlayer-in-WKWebView.git', :tag => s.version }
 
-  s.platform     = :ios, '8.0'
+  s.platform     = :osx, '10.6'
   s.requires_arc = true
 
   s.source_files = 'WKYTPlayerView'
