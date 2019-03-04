@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import <UIKit/UIKit.h>
+
 #import <WebKit/WebKit.h>
 
 @class WKYTPlayerView;
@@ -109,7 +109,7 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * @param playerView The WKYTPlayerView instance where the error has occurred.
  * @return A color object that represents the background color of the webview.
  */
-- (nonnull UIColor *)playerViewPreferredWebViewBackgroundColor:(nonnull WKYTPlayerView *)playerView;
+- (nonnull NSColor *)playerViewPreferredWebViewBackgroundColor:(nonnull WKYTPlayerView *)playerView;
 
 /**
  * Callback invoked when initially loading the YouTube iframe to the webview to display a custom
@@ -128,7 +128,7 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * @return A view object that will be displayed while YouTube iframe API is being loaded.
  *         Pass nil to display no custom loading view. Default implementation returns nil.
  */
-- (nullable UIView *)playerViewPreferredInitialLoadingView:(nonnull WKYTPlayerView *)playerView;
+- (nullable NSView *)playerViewPreferredInitialLoadingView:(nonnull WKYTPlayerView *)playerView;
 
 @end
 
@@ -139,12 +139,12 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * WKYTPlayerView::loadWithPlaylistId: or their variants to set the video or playlist
  * to populate the view with.
  */
-@interface WKYTPlayerView : UIView<WKNavigationDelegate>
+@interface WKYTPlayerView : NSView<WKNavigationDelegate>
 
 @property(nonatomic, strong, nullable, readonly) WKWebView *webView;
 
 /** A delegate to be notified on playback events. */
-@property(nonatomic, weak, nullable) id<WKYTPlayerViewDelegate> delegate;
+@property(nonatomic, strong, nullable) id<WKYTPlayerViewDelegate> delegate;
 
 /**
  * This method loads the player with the given video ID.
