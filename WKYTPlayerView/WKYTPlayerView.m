@@ -65,7 +65,7 @@ NSString static *const kWKYTPlayerSyndicationRegexPattern = @"^https://tpc.googl
 @interface WKYTPlayerView()
 
 @property (nonatomic, strong) NSURL *originURL;
-@property (nonatomic, weak) UIView *initialLoadingView;
+@property (nonatomic, strong) NSView *initialLoadingView;
 
 @end
 
@@ -817,7 +817,7 @@ NSString static *const kWKYTPlayerSyndicationRegexPattern = @"^https://tpc.googl
     if (ytMatch || adMatch || oauthMatch || staticProxyMatch || syndicationMatch) {
         return YES;
     } else {
-        [[UIApplication sharedApplication] openURL:url];
+        //[[NSApplication sharedApplication] open:url];
         return NO;
     }
 }
@@ -943,10 +943,10 @@ NSString static *const kWKYTPlayerSyndicationRegexPattern = @"^https://tpc.googl
     self.webView.navigationDelegate = self;
     
     if ([self.delegate respondsToSelector:@selector(playerViewPreferredInitialLoadingView:)]) {
-        UIView *initialLoadingView = [self.delegate playerViewPreferredInitialLoadingView:self];
+        NSView *initialLoadingView = [self.delegate playerViewPreferredInitialLoadingView:self];
         if (initialLoadingView) {
             initialLoadingView.frame = self.bounds;
-            initialLoadingView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+            //initialLoadingView.autoresizingMask = NSViewAutoresizingFlexibleWidth | NSViewAutoresizingFlexibleHeight;
             [self addSubview:initialLoadingView];
             self.initialLoadingView = initialLoadingView;
         }
@@ -1058,20 +1058,8 @@ NSString static *const kWKYTPlayerSyndicationRegexPattern = @"^https://tpc.googl
     
     configuration.userContentController = wkUController;
     
-    configuration.allowsInlineMediaPlayback = YES;
-    configuration.mediaPlaybackRequiresUserAction = NO;
-    
+
     WKWebView *webView = [[WKWebView alloc] initWithFrame:self.bounds configuration:configuration];
-    webView.scrollView.scrollEnabled = NO;
-    webView.scrollView.bounces = NO;
-    
-    if ([self.delegate respondsToSelector:@selector(playerViewPreferredWebViewBackgroundColor:)]) {
-        webView.backgroundColor = [self.delegate playerViewPreferredWebViewBackgroundColor:self];
-        if (webView.backgroundColor == [UIColor clearColor]) {
-            webView.opaque = NO;
-        }
-    }
-    
     return webView;
 }
 
