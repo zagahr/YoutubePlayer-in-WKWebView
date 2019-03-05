@@ -941,7 +941,9 @@ NSString static *const kWKYTPlayerSyndicationRegexPattern = @"^https://tpc.googl
     NSString *embedHTML = [NSString stringWithFormat:embedHTMLTemplate, playerVarsJsonString];
     [self.webView loadHTMLString:embedHTML baseURL: self.originURL];
     self.webView.navigationDelegate = self;
-    
+
+    [self.webView setValue:@(NO) forKey:@"drawsBackground"];
+
     if ([self.delegate respondsToSelector:@selector(playerViewPreferredInitialLoadingView:)]) {
         NSView *initialLoadingView = [self.delegate playerViewPreferredInitialLoadingView:self];
         if (initialLoadingView) {
@@ -1060,6 +1062,7 @@ NSString static *const kWKYTPlayerSyndicationRegexPattern = @"^https://tpc.googl
     
 
     WKWebView *webView = [[WKWebView alloc] initWithFrame:self.bounds configuration:configuration];
+
     return webView;
 }
 
